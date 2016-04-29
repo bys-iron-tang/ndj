@@ -1,0 +1,6 @@
+{
+	"port":8081,
+	"routers":{
+		"getAddressByAddressUri":"/api/geo/v1/xapo/(*+)/addresses/byaddress"
+	}
+}
