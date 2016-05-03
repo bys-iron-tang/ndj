@@ -25,9 +25,30 @@ PoolManager.prototype.createPool=function(config,cb){
 
 			that._poolCount+=1;
 			p._poolName=key;
-			p._q=async.queue(function(task,releaseDb){
-				
-			})
+			p._q=async.queue(function(task,releaseCb){
+				p.getConnection(err,connection){
+					task.getConnCb(err,connection,releaseCb);
+				}
+			},config.poolMax);
+
+			that._poolMap[key]=p;
+
+			resolve(that._poolMap[key]);
 		});
 	};
+
+    promise=new Promise(resolver);
+    return promise;
+};
+
+PoolManager.prototype.defaultPoolExist=function(){
+	return !!this._poolMap[this._defaultPoolKey];
+};
+
+PoolManager.prototype.getDefaultPool=function(){
+	return this.getPool(this._defaultPoolKey);
+};
+
+PoolManager.prototype.getPool=function(poolName){
+	
 };
