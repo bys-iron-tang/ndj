@@ -50,5 +50,25 @@ PoolManager.prototype.getDefaultPool=function(){
 };
 
 PoolManager.prototype.getPool=function(poolName){
-	
+	if(poolName){
+		if(this._poolMap[poolName]){
+			return this._poolMap[poolName];
+		}
+	}else{
+		if(this.defaultPoolExist()){
+			return this.getDefaultPool();
+		}
+	}
+};
+
+PoolManager.prototype.terminatePool=function(a){
+	resolver=function(resolve,reject){
+		if(!that._poolMap[key]){
+
+		}else{
+			that._poolMap[key].terminate()
+		}
+	};
+	promise=new Promise(resolver);
+	return promise;
 };
